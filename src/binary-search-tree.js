@@ -9,6 +9,7 @@ const { NotImplementedError } = require('../extensions/index.js');
 
 class Node{
   constructor(value){
+    this.data=value;
     this.value=value;
     this.left=null;
     this.right=null;
@@ -20,10 +21,19 @@ class Node{
 
 class BinarySearchTree {
   constructor(){
-    this.root=null;
+    this.Root=null;
   }
 
   root() {
+   
+    if(!this.Root){
+      
+      return null ;
+
+    }
+
+   
+    return this.Root;
    
   }
   
@@ -31,11 +41,11 @@ class BinarySearchTree {
   add(value) {
 
     const newNode = new Node(value)
-     if(!this.root){
-       this.root=newNode;
+     if(!this.Root){
+       this.Root=newNode;
        return;
      }
-     let currentNode=this.root;
+     let currentNode=this.Root;
      while(currentNode){
        if(newNode.value<currentNode.value){
          if(!currentNode.left){
@@ -56,7 +66,7 @@ class BinarySearchTree {
   }
 
   has(value) {
-    return Find(this.root,value);
+    return Find(this.Root,value);
 
     function Find(a,value){
       if(!a){
@@ -69,13 +79,13 @@ class BinarySearchTree {
 
       if(value<a.value){
         return Find(a.left,value)
-      } else return Find(a.right,value)
+      } else {return Find(a.right,value)}
     
     }
   }
 
   find(value) {
-    return Find(this.root,value);
+    return Find(this.Root,value);
 
     function Find(a,value){
       if(!a){
@@ -83,18 +93,18 @@ class BinarySearchTree {
       }
       
       if(a.value===value){
-        return a;
+        return a.value;
       }
 
       if(value<a.value){
         return Find(a.left,value)
-      } else return Find(a.right,value)
+      } else {return Find(a.right,value)}
     
     }
   }
 
   remove(value) {
-    this.root=take(this.root,value);
+    this.root=take(this.Root,value);
 
     function take(a,value){
      if(!a){
@@ -139,11 +149,11 @@ class BinarySearchTree {
   }
 
   min() {
-    if(!this.root){
+    if(!this.Root){
       return;
     }
 
-    let a=this.root;
+    let a=this.Root;
     while(a.left){
       a=a.left;
     }
@@ -151,11 +161,11 @@ class BinarySearchTree {
   }
 
   max() {
-    if(!this.root){
+    if(!this.Root){
       return;
     }
 
-    let a=this.root;
+    let a=this.Root;
     while(a.right){
       a=a.right;
     }
