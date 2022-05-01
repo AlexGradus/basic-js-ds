@@ -17,18 +17,20 @@ class Node{
 
 }
 
+
 class BinarySearchTree {
   constructor(){
     this.root=null;
   }
 
   root() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+   
   }
+  
 
   add(value) {
-   const newNode = new Node(value)
+
+    const newNode = new Node(value)
      if(!this.root){
        this.root=newNode;
        return;
@@ -48,32 +50,116 @@ class BinarySearchTree {
 
        }
      }
-
+    
+   
+      
   }
 
-  has(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  has(value) {
+    return Find(this.root,value);
+
+    function Find(a,value){
+      if(!a){
+        return false;
+      }
+      
+      if(a.value===value){
+        return true;
+      }
+
+      if(value<a.value){
+        return Find(a.left,value)
+      } else return Find(a.right,value)
+    
+    }
   }
 
-  find(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  find(value) {
+    return Find(this.root,value);
+
+    function Find(a,value){
+      if(!a){
+        return null;
+      }
+      
+      if(a.value===value){
+        return a;
+      }
+
+      if(value<a.value){
+        return Find(a.left,value)
+      } else return Find(a.right,value)
+    
+    }
   }
 
-  remove(/* data */) {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+  remove(value) {
+    this.root=take(this.root,value);
+
+    function take(a,value){
+     if(!a){
+       return null;
+     }
+
+     if(value<a.value){
+      a.left=take(a.left,value)
+      return a;
+    } else if(value>a.value){
+      a.right=take(a.right,value)
+      return a;
+    
+    } else{
+
+       if(!a.right&&!a.left){
+         return null;
+       }
+       if(!a.right){
+         a=a.left;
+         return a;
+       }
+
+       if(!a.left){
+         a=a.right;
+         return a;
+       }
+
+       let we=a.right;
+       while(we.left){
+         we=we.left
+       }
+
+       a.value=we.value;
+       a.right=take(a.right,we.value)
+
+       return a;
+
+    }
+
+    }
   }
 
   min() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    if(!this.root){
+      return;
+    }
+
+    let a=this.root;
+    while(a.left){
+      a=a.left;
+    }
+    return a.value
   }
 
   max() {
-    throw new NotImplementedError('Not implemented');
-    // remove line with error and write your code here
+    if(!this.root){
+      return;
+    }
+
+    let a=this.root;
+    while(a.right){
+      a=a.right;
+    }
+    return a.value
   }
 }
 
