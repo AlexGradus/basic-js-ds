@@ -84,21 +84,21 @@ class BinarySearchTree {
     }
   }
 
-  find(value) {
-    return Find(this.Root,value);
+  find(data) {
+    return Find(this.Root,data);
 
-    function Find(a,value){
+    function Find(a,data){
       if(!a){
         return null;
       }
       
-      if(a.value===value){
-        return a.value;
+      if(a.data===data){
+        return a;
       }
 
-      if(value<a.value){
-        return Find(a.left,value)
-      } else {return Find(a.right,value)}
+      if(data<a.data){
+        return Find(a.left,data)
+      } else {return Find(a.right,data)}
     
     }
   }
